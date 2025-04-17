@@ -14,6 +14,7 @@ namespace CryptoSimulator.Services
         public AutoMapperProfile()
         {
             CreateMap<CryptoCurrency, CryptoCurrencyDto>().ReverseMap();
+            CreateMap<CryptoCurrencyCreateDto, CryptoCurrency>();
         }
     }
 }
