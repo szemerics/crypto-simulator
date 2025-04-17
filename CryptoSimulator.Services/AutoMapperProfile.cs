@@ -15,6 +15,11 @@ namespace CryptoSimulator.Services
         {
             CreateMap<CryptoCurrency, CryptoCurrencyDto>().ReverseMap();
             CreateMap<CryptoCurrencyCreateDto, CryptoCurrency>();
+
+
+            CreateMap<User, UserDto>().ReverseMap();
+            CreateMap<UserRegisterDto, User>();
+            CreateMap<UserUpdateDto, User>();
         }
     }
 }
