@@ -11,6 +11,5 @@
         public CryptoCurrency CryptoCurrency { get; set; }
         public decimal Quantity { get; set; }
         public decimal PurchasePrice { get; set; }
-
     }
 }
