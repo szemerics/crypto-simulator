@@ -15,7 +15,6 @@ namespace CryptoSimulator.DataContext.Entities
 
 
         // What does the user have:
-        public int WalletId { get; set; }
         public Wallet Wallet { get; set; }
         public ICollection<Transaction> Transactions { get; set; }
 

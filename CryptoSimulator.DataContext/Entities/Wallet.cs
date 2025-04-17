@@ -8,7 +8,7 @@ namespace CryptoSimulator.DataContext.Entities
 {
     public class Wallet : AbstractEntity
     {
-        public int UserId { get; set; }
+        public int UserId { get; set; } // Foreign key -> Wallet depends on User
         public User User { get; set; }
         public decimal Balance { get; set; }
 
