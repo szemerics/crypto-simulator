@@ -1,4 +1,5 @@
 using CryptoSimulator.DataContext.Context;
+using CryptoSimulator.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +14,11 @@ builder.Services.AddOpenApi();
 // Connection String
 builder.Services.AddDbContext<CryptoDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("CryptoSimulatorContext")));
 
+// Services
+builder.Services.AddScoped<ICryptoCurrencyService, CryptoCurrencyService>();
+
+// Mapper
+builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
 // Swagger
 builder.Services.AddEndpointsApiExplorer();
