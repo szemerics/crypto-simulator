@@ -18,6 +18,10 @@ builder.Services.AddDbContext<CryptoDbContext>(options => options.UseSqlServer(b
 builder.Services.AddScoped<ICryptoCurrencyService, CryptoCurrencyService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IWalletService, WalletService>();
+builder.Services.AddScoped<IPriceService, PriceService>();
+// Background Serivce
+builder.Services.AddHostedService<PriceUpdateService>();
+
 
 // Mapper
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));

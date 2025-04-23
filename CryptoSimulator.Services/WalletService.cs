@@ -33,7 +33,7 @@ namespace CryptoSimulator.Services
                         .Include(w => w.User)
                         .Include(w => w.Portfolios)
                             .ThenInclude(p => p.CryptoCurrency)
-                         // .IgnoreQueryFilters() -> if you want to include soft-deleted portfolios
+                            //.IgnoreQueryFilters() // -> if you want to include soft-deleted portfolios
                         .FirstOrDefaultAsync(w => w.UserId == userId);
 
             if (userWallet == null)
