@@ -25,8 +25,6 @@ namespace CryptoSimulator.DataContext.Dtos
     {
         public string CryptoCurrencySymbol { get; set; }
         public decimal Quantity { get; set; }
-
-
     }
 
 }

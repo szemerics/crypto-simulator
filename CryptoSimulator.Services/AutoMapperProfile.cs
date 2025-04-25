@@ -30,6 +30,11 @@ namespace CryptoSimulator.Services
             CreateMap<PriceHistory, PriceHistoryDto>()
                 .ForMember(dest => dest.CryptoCurrencySymbol, opt => opt.MapFrom(src => src.CryptoCurrency.Symbol))
                 .ReverseMap();
+
+            CreateMap<Transaction, TransactionDto>()
+                .ForMember(dest => dest.CryptoCurrencySymbol, opt => opt.MapFrom(src => src.CryptoCurrency.Symbol))
+                .ReverseMap();
+            CreateMap<TransactionCreateDto, Transaction>();
         }
     }
 }

@@ -24,6 +24,8 @@ builder.Services.AddScoped<ICryptoCurrencyService, CryptoCurrencyService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IWalletService, WalletService>();
 builder.Services.AddScoped<IPriceService, PriceService>();
+builder.Services.AddScoped<ITransactionService, TransactionService>();
+builder.Services.AddScoped<IPortfolioService, PortfolioService>();
 // Background Serivce
 builder.Services.AddHostedService<PriceUpdateService>();
 
