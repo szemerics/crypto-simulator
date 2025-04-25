@@ -77,12 +77,15 @@ namespace CryptoSimulator.Services
                 throw new ArgumentNullException("Wallet not found");
             }
 
-            // soft-delete
-            userWallet.isDeleted = true;
+            //// soft-delete
+            //userWallet.isDeleted = true;
+            //_context.Wallets.Update(userWallet);
+
+            userWallet.Portfolios.Clear(); // Clearing portfolios
+            userWallet.Balance = 10000; // Resetting balance to default value
+
             _context.Wallets.Update(userWallet);
             await _context.SaveChangesAsync();
-
-
             return true;
         }
     }

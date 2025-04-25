@@ -1,11 +1,13 @@
 ﻿using CryptoSimulator.DataContext.Dtos;
 using CryptoSimulator.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CryptoSimulator.Controllers
 {
     [ApiController]
-    [Route("api/cryptos/[action]")]
+    [Route("api/cryptos")]
+    [Authorize]
     public class CryptoCurrencyController : ControllerBase
     {
         private readonly ICryptoCurrencyService _cryptoCurrencyService;
@@ -18,13 +20,15 @@ namespace CryptoSimulator.Controllers
 
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> GetAllCryptoCurrencies()
         {
             var cryptoCurrencies = await _cryptoCurrencyService.GetAllCryptoCurrenciesAsync();
             return Ok(cryptoCurrencies);
         }
 
-        [HttpGet]
+        [HttpGet("{cryptoId}")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetCryptoById(int cryptoId)
         {
             var crypto = await _cryptoCurrencyService.GetCryptoCurrencyByIdAsync(cryptoId);
@@ -33,6 +37,7 @@ namespace CryptoSimulator.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateCrypto([FromBody] CryptoCurrencyCreateDto cryptoCurrencyDto)
         {
             var crypto = await _cryptoCurrencyService.CreateCryptoCurrencyAsync(cryptoCurrencyDto);
@@ -40,7 +45,8 @@ namespace CryptoSimulator.Controllers
             return CreatedAtAction(nameof(GetCryptoById), new { cryptoId = crypto.Id }, crypto);
         }
 
-        [HttpDelete]
+        [HttpDelete("{cryptoId}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteCrypto(int cryptoId)
         {
             var result = await _cryptoCurrencyService.DeleteCryptoCurrencyAsync(cryptoId);

@@ -16,6 +16,7 @@ namespace CryptoSimulator.DataContext.Context
 
         }
         public DbSet<Entities.User> Users { get; set; }
+        public DbSet<Entities.Role> Roles { get; set; }
         public DbSet<Entities.CryptoCurrency> CryptoCurrencies { get; set; }
         public DbSet<Entities.Transaction> Transactions { get; set; }
         public DbSet<Entities.Portfolio> Portfolios { get; set; }
@@ -33,6 +34,13 @@ namespace CryptoSimulator.DataContext.Context
                 modelBuilder.Entity(entityType.ClrType)
                     .HasQueryFilter(GetIsDeletedFilter(entityType.ClrType));
             }
+
+            // Role Config
+            modelBuilder.Entity<Role>().HasData(
+                new Role { Id = 1, Name = "Admin" },
+                new Role { Id = 2, Name = "User" }
+            );
+
         }
 
         private static LambdaExpression GetIsDeletedFilter(Type type)
