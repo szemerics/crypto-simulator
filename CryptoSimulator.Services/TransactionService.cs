@@ -15,6 +15,8 @@ namespace CryptoSimulator.Services
     {
         Task<TransactionDto> BuyTransactionAsync(int userId, TransactionCreateDto transactionDto);
         Task<TransactionDto> SellTransactionAsync(int userId, TransactionCreateDto transactionDto);
+        Task<List<TransactionDto>> GetTransactionsByUserIdAsync(int userId);
+        Task<TransactionDetailedDto> GetDetailedTransactionsByIdAsync(int transactionId);
     }
     public class TransactionService : ITransactionService
     {
@@ -150,6 +152,31 @@ namespace CryptoSimulator.Services
                 await dbTransaction.RollbackAsync();
                 throw new Exception("Transaction failed - Error selling crypto", ex);
             }
+        }
+
+        public async Task<List<TransactionDto>> GetTransactionsByUserIdAsync(int userId)
+        {
+            var transactions = await _context.Transactions
+                .Include(t => t.CryptoCurrency)
+                .Where(t => t.UserId == userId)
+                .ToListAsync();
+
+            return _mapper.Map<List<TransactionDto>>(transactions);
+        }
+
+        public async Task<TransactionDetailedDto> GetDetailedTransactionsByIdAsync(int transactionId)
+        {
+            var transaction = await _context.Transactions
+                .Include(t => t.CryptoCurrency)
+                .Include(t => t.User)
+                .FirstOrDefaultAsync(t => t.Id == transactionId);
+
+            if (transaction == null)
+            {
+                throw new ArgumentNullException("Transaction not found");
+            }
+
+            return _mapper.Map<TransactionDetailedDto>(transaction);
         }
     }
 }
