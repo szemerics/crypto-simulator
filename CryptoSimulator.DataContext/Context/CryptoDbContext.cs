@@ -22,6 +22,7 @@ namespace CryptoSimulator.DataContext.Context
         public DbSet<Entities.Portfolio> Portfolios { get; set; }
         public DbSet<Entities.Wallet> Wallets { get; set; }
         public DbSet<Entities.PriceHistory> PriceHistories { get; set; }
+        public DbSet<Entities.LimitOrder> LimitOrders { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
