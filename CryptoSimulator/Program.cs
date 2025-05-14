@@ -26,8 +26,10 @@ builder.Services.AddScoped<IWalletService, WalletService>();
 builder.Services.AddScoped<IPriceService, PriceService>();
 builder.Services.AddScoped<ITransactionService, TransactionService>();
 builder.Services.AddScoped<IPortfolioService, PortfolioService>();
+builder.Services.AddScoped<ILimitOrderService, LimitOrderService>();
 // Background Serivce
 builder.Services.AddHostedService<PriceUpdateService>();
+builder.Services.AddHostedService<LimitOrderProcessingService>();
 
 // JWT Bearer Authentication
 JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
