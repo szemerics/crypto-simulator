@@ -16,7 +16,6 @@ namespace CryptoSimulator.Services
             CreateMap<CryptoCurrency, CryptoCurrencyDto>().ReverseMap();
             CreateMap<CryptoCurrencyCreateDto, CryptoCurrency>();
 
-
             CreateMap<User, UserDto>().ReverseMap();
             CreateMap<UserRegisterDto, User>();
             CreateMap<UserUpdateDto, User>();
@@ -38,6 +37,12 @@ namespace CryptoSimulator.Services
             CreateMap<Transaction, TransactionDetailedDto>()
                 .ForMember(dest => dest.CryptoCurrencySymbol, opt => opt.MapFrom(src => src.CryptoCurrency.Symbol))
                 .ForMember(dest => dest.PriceAtTransactionDate, opt => opt.MapFrom(src => src.Quantity == 0 ? 0 : src.Price / src.Quantity));
+
+            CreateMap<LimitOrder, LimitOrderDto>()
+                .ForMember(dest => dest.CryptoCurrencySymbol, opt => opt.MapFrom(src => src.CryptoCurrency.Symbol))
+                .ForMember(dest => dest.OrderType, opt => opt.MapFrom(src => src.OrderType.ToString()))
+                .ForMember(dest => dest.OrderStatus, opt => opt.MapFrom(src => src.OrderStatus.ToString()));
+            CreateMap<LimitOrderCreateDto, LimitOrder>();
         }
     }
 }
